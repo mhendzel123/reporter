@@ -6,7 +6,7 @@ public class Zadanie {
     // TODO: kastowanie data do LocalDate celem latwiejszej pozniejszej obrobki/wykonywania zadan
     private String data;
     private String nazwaZadania;
-    private int czasPracy;
+    private float czasPracy;
 
     public Zadanie(String data, String nazwaZadania, int czasPracy) {
         this.data = data;
@@ -17,7 +17,7 @@ public class Zadanie {
     public Zadanie(Row zadanieWiersz) {
         this.data = zadanieWiersz.getCell(0).toString();
         this.nazwaZadania = zadanieWiersz.getCell(1).toString();
-        this.czasPracy = Integer.parseInt(String.valueOf(zadanieWiersz.getCell(2)));
+        this.czasPracy = Float.parseFloat(String.valueOf(zadanieWiersz.getCell(2)));
     }
 
     public String getData() {
@@ -36,11 +36,20 @@ public class Zadanie {
         this.nazwaZadania = nazwaZadania;
     }
 
-    public int getCzasPracy() {
+    public float getCzasPracy() {
         return czasPracy;
     }
 
     public void setCzasPracy(int czasPracy) {
         this.czasPracy = czasPracy;
+    }
+
+    @Override
+    public String toString() {
+        return "Zadanie{" +
+                "data='" + data + '\'' +
+                ", nazwaZadania='" + nazwaZadania + '\'' +
+                ", czasPracy=" + czasPracy +
+                '}';
     }
 }

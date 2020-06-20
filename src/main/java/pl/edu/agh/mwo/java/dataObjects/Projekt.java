@@ -3,12 +3,13 @@ package pl.edu.agh.mwo.java.dataObjects;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class Projekt {
     private String nazwa;
-    private List<Zadanie> listaZadan;
+    private List<Zadanie> listaZadan = new ArrayList<>();
 
     public Projekt(String nazwa, List<Zadanie> listaZadan) {
         this.nazwa = nazwa;
@@ -17,7 +18,9 @@ public class Projekt {
 
     public Projekt(Sheet projektKarta) {
         this.nazwa = projektKarta.getSheetName();
-        for (Iterator<Row> zadanieWiersz = projektKarta.rowIterator(); zadanieWiersz.hasNext(); ) {
+        Iterator<Row> zadanieWiersz = projektKarta.rowIterator();
+        zadanieWiersz.next();
+        while (zadanieWiersz.hasNext()) {
             listaZadan.add(new Zadanie(zadanieWiersz.next()));
         }
     }
@@ -42,5 +45,13 @@ public class Projekt {
         for (Iterator<Row> zadanieWiersz = projektKarta.rowIterator(); zadanieWiersz.hasNext(); ) {
             listaZadan.add(new Zadanie(zadanieWiersz.next()));
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Projekt{" +
+                "nazwa='" + nazwa + '\'' +
+                ", listaZadan=" + listaZadan +
+                '}';
     }
 }

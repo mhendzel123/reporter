@@ -3,11 +3,12 @@ package pl.edu.agh.mwo.java.dataObjects;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pracownik {
     private String nazwa;
-    private List<Projekt> listaProjektow;
+    private List<Projekt> listaProjektow = new ArrayList<>();
 
     public Pracownik(String nazwa, List<Projekt> listaProjektow) {
         this.nazwa = nazwa;
@@ -51,5 +52,13 @@ public class Pracownik {
                 }
             });
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Pracownik{" +
+                "nazwa='" + nazwa + '\'' +
+                ", listaProjektow=" + listaProjektow +
+                '}';
     }
 }
