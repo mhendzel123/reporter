@@ -30,18 +30,18 @@ import org.apache.commons.cli.*;
 public class App {
 	
 	public static void printSheetNames(Workbook wb){
-for (Sheet sheet : wb) {
-System.out.println(sheet.getSheetName());
-for (Row row : sheet) {
-for (Cell cell : row) {
-	System.out.print(cell + "\t");
-	}
-System.out.print("\n");
+		for (Sheet sheet : wb) {
+			System.out.println(sheet.getSheetName());
+			for (Row row : sheet) {
+				for (Cell cell : row) {
+					System.out.print(cell + "\t");
+										}
+					System.out.print("\n");
 		            
-		        }
+		        				}
 		            
-		    }
-		    }
+		    				}
+		    		}
 	
 	
 	public static Workbook openWorkbook(String file) throws EncryptedDocumentException, IOException {
