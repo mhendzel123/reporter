@@ -1,7 +1,19 @@
+
+
+    
+
 package pl.edu.agh.mwo.java;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory; 
+
 
 import java.util.Set;
 import java.util.HashSet;
@@ -17,8 +29,36 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.commons.cli.*;
 
 public class App {
+	
+	public static void printSheetNames(Workbook wb){
+for (Sheet sheet : wb) {
+System.out.println(sheet.getSheetName());
+for (Row row : sheet) {
+for (Cell cell : row) {
+	System.out.print(cell + "\t");
+	}
+System.out.print("\n");
+		            
+		        }
+		            
+		    }
+		    }
+	
+	
+	public static Workbook openWorkbook() {
+		try {
+		return WorkbookFactory.create(new File("src/main/resources/2012/01/Kowalski_Jan.xls"));
+		} catch (EncryptedDocumentException | IOException e) {
+		e.printStackTrace();
+		return null;
+		        }
+		    }
+	
+	
     			public static void main(String[] args) throws Exception 
     			{
+    				
+    			
     				  Options options = new Options();
 
     			        Option source = new Option("s", "source", true, "input file path");
@@ -48,9 +88,14 @@ public class App {
 
     			        System.out.println(inputFilePath);
     			        System.out.println(reportType);
+    			        
+    			        
+    			    	Workbook wb = openWorkbook();
+        				printSheetNames(wb);
 
     			        
     			}
 
         
      	}
+
