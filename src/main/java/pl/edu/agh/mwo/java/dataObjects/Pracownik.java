@@ -18,7 +18,7 @@ public class Pracownik {
         this.nazwa = nazwa;
         for (int i = 0; i < projekty.getNumberOfSheets(); i++)
         {
-            listaProjektow.add((Projekt) projekty.getSheetAt(i));
+            listaProjektow.add(new Projekt(projekty.getSheetAt(i)));
         }
     }
 
@@ -47,7 +47,7 @@ public class Pracownik {
                 if (projekt.getNazwa().equals(nazwaProjektu)) {
                     projekt.updateProjekt(projektKarta);
                 } else {
-                    listaProjektow.add((Projekt) projektKarta);
+                    listaProjektow.add(new Projekt(projektKarta));
                 }
             });
         }
