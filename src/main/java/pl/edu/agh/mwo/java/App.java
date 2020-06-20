@@ -1,7 +1,4 @@
 
-
-    
-
 package pl.edu.agh.mwo.java;
 
 import org.apache.poi.ss.usermodel.Sheet;
@@ -12,7 +9,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory; 
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 
 import java.util.Set;
@@ -22,6 +19,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.HashMap;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -46,7 +44,7 @@ System.out.print("\n");
 		    }
 	
 	
-	public static Workbook openWorkbook(String file) {
+	public static Workbook openWorkbook(String file) throws EncryptedDocumentException, IOException {
 		return WorkbookFactory.create(new File(file));
 		}
 	
