@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.HashMap;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -45,14 +46,9 @@ System.out.print("\n");
 		    }
 	
 	
-	public static Workbook openWorkbook() {
-		try {
-		return WorkbookFactory.create(new File("src/main/resources/2012/01/Kowalski_Jan.xls"));
-		} catch (EncryptedDocumentException | IOException e) {
-		e.printStackTrace();
-		return null;
-		        }
-		    }
+	public static Workbook openWorkbook(String file) {
+		return WorkbookFactory.create(new File(file));
+		}
 	
 	
     			public static void main(String[] args) throws Exception 
@@ -90,7 +86,7 @@ System.out.print("\n");
     			        System.out.println(reportType);
     			        
     			        
-    			    	Workbook wb = openWorkbook();
+    			    	Workbook wb = openWorkbook(inputFilePath);
         				printSheetNames(wb);
 
     			        
