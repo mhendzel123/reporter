@@ -18,7 +18,7 @@ public class Projekt {
     public Projekt(Sheet projektKarta) {
         this.nazwa = projektKarta.getSheetName();
         for (Iterator<Row> zadanieWiersz = projektKarta.rowIterator(); zadanieWiersz.hasNext(); ) {
-            listaZadan.add((Zadanie) zadanieWiersz.next());
+            listaZadan.add(new Zadanie(zadanieWiersz.next()));
         }
     }
 
@@ -40,7 +40,7 @@ public class Projekt {
 
     public void updateProjekt(Sheet projektKarta) {
         for (Iterator<Row> zadanieWiersz = projektKarta.rowIterator(); zadanieWiersz.hasNext(); ) {
-            listaZadan.add((Zadanie) zadanieWiersz.next());
+            listaZadan.add(new Zadanie(zadanieWiersz.next()));
         }
     }
 }
