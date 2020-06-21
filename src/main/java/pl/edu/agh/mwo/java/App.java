@@ -74,6 +74,8 @@ public class App {
 		  if (Integer.parseInt(reportType) == 2) {
 	            Raport2 report2 = new Raport2(projekty);
 	            report2.printReportConsole();
+				report2.generateReportExcel();
+
 	        }
 	
 
