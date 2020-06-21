@@ -53,14 +53,14 @@ public class WorkbookLoader {
                     Pracownik nowyPracownik = new Pracownik(nazwaNowegoPracownika, nowyArkusz);
                     if (listaPracownikow.size() == 0) {
                         listaPracownikow.add(nowyPracownik);
-                    } else if (!sprawdzCzyPracownikIstnieje(nowyPracownik)) {
-//                        for (Pracownik obecnyPracownik : listaPracownikow) {
-//                            if (obecnyPracownik.getNazwa().equals(nowyPracownik.getNazwa())) {
-//                                obecnyPracownik.updatePracownik(nowyArkusz);
-//                                break;
-//                            }
-//                        }
-//                    } else {
+                    } else if (sprawdzCzyPracownikIstnieje(nowyPracownik)) {
+                        for (Pracownik obecnyPracownik : listaPracownikow) {
+                            if (obecnyPracownik.getNazwa().equals(nowyPracownik.getNazwa())) {
+                                obecnyPracownik.updatePracownik(nowyArkusz);
+                                break;
+                            }
+                        }
+                    } else {
                         listaPracownikow.add(nowyPracownik);
                     }
                 }
@@ -88,8 +88,14 @@ public class WorkbookLoader {
                         //System.out.println(newProject.getNazwa());
                     if (listaProjektow.size() == 0) {
                         listaProjektow.add(newProject);
-                    } else if (!sprawdzCzyProjektIstnieje(newProject)) {
-                    
+                    } else if (sprawdzCzyProjektIstnieje(newProject)) {
+                        for (Projekt obecnyProjekt : listaProjektow) {
+                            if (obecnyProjekt.getNazwa().equals(newProject.getNazwa())) {
+                                obecnyProjekt.updateProjekt(sheet);
+                                break;
+                            }
+                        }
+                    } else {
                         listaProjektow.add(newProject);
                     }
                     }

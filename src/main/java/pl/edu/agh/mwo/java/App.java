@@ -18,6 +18,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.commons.cli.*;
 import pl.edu.agh.mwo.java.Reports.Raport1;
 import pl.edu.agh.mwo.java.Reports.Raport2;
+import pl.edu.agh.mwo.java.Reports.Raport3;
 import pl.edu.agh.mwo.java.dataObjects.Pracownik;
 import pl.edu.agh.mwo.java.dataObjects.Projekt;
 
@@ -77,6 +78,13 @@ public class App {
 				report2.generateReportExcel();
 
 	        }
+		  
+		  if (Integer.parseInt(reportType) == 3) {
+              Raport3 report3 = new Raport3(projekty, pracownicy);
+              report3.printReportConsole();
+              report3.generateReportExcel();
+
+          }
 	
 
 	}
