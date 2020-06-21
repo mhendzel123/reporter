@@ -14,14 +14,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Map;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  
 
 public class Raport1 implements Raport {
@@ -77,7 +69,7 @@ public class Raport1 implements Raport {
 	                    
 	            }
 	                    
-	        try (FileOutputStream outputStream = new FileOutputStream("Raport.xlsx")) {
+	        try (FileOutputStream outputStream = new FileOutputStream("Raport_1.xlsx")) {
 	            workbook.write(outputStream);
 	        } catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
