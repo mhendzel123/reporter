@@ -3,12 +3,24 @@ package pl.edu.agh.mwo.java;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+
+import pl.edu.agh.mwo.java.Reports.Raport1;
+import pl.edu.agh.mwo.java.Reports.Raport2;
+
 import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.HashMap;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -17,40 +29,68 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.commons.cli.*;
 
 public class App {
-    			public static void main(String[] args) throws Exception 
-    			{
-    				  Options options = new Options();
 
-    			        Option source = new Option("s", "source", true, "input file path");
-    			        source.setRequired(true);
-    			        options.addOption(source);
-    			        
-    			        Option report = new Option("r", "report", true, "report type");
-    			        source.setRequired(true);
-    			        options.addOption(report);
+	public static void printSheetNames(Workbook wb){
+		for (Sheet sheet : wb) {
+			System.out.println(sheet.getSheetName());
+			for (Row row : sheet) {
+				for (Cell cell : row) {
+					System.out.print(cell + "\t");
+											}
+					System.out.print("\n");
+}
+}
+}
 
-    			        CommandLineParser parser = new DefaultParser();
-    			        HelpFormatter formatter = new HelpFormatter();
-    			        CommandLine cmd = null;
+	public static Workbook openWorkbook(String file) throws EncryptedDocumentException, IOException {
+		return WorkbookFactory.create(new File(file));
+	}
 
-    			        try {
-    			            cmd = parser.parse(options, args);
-    			        } catch (ParseException e) {
-    			            System.out.println(e.getMessage());
-    			            formatter.printHelp("utility-name", options);
+	public static void main(String[] args) throws Exception {
 
-    			            System.exit(1);
-    			        }
+		Options options = new Options();
 
-    			        String inputFilePath = cmd.getOptionValue("source");
-    			        String reportType = cmd.getOptionValue("report");
+		Option source = new Option("s", "source", true, "input file path");
+		source.setRequired(true);
+		options.addOption(source);
 
+		Option report = new Option("r", "report", true, "report type");
+		source.setRequired(true);
+		options.addOption(report);
 
-    			        System.out.println(inputFilePath);
-    			        System.out.println(reportType);
+		CommandLineParser parser = new DefaultParser();
+		HelpFormatter formatter = new HelpFormatter();
+		CommandLine cmd = null;
 
-    			        
-    			}
+		try {
+			cmd = parser.parse(options, args);
+		} catch (ParseException e) {
+			System.out.println(e.getMessage());
+			formatter.printHelp("utility-name", options);
 
-        
-     	}
+			System.exit(1);
+		}
+
+		String inputFilePath = cmd.getOptionValue("source");
+		String reportType = cmd.getOptionValue("report");
+
+		System.out.println(inputFilePath);
+		System.out.println(reportType);
+
+		switch (reportType) {
+	    case "raport1":
+	        Raport1 raport1=new Raport1();
+	        raport1.printReportConsole(inputFilePath);
+	        break;
+	    case "raport2":
+	        Raport2 raport2=new Raport2();
+	        raport2.printReportConsole(inputFilePath);
+	        break;
+	    case "":
+	        break;
+	}
+		
+		
+	}
+
+}
