@@ -68,6 +68,7 @@ public class App {
 		if (Integer.parseInt(reportType) == 1) {
 			Raport1 report1 = new Raport1(pracownicy);
 			report1.printReportConsole();
+			report1.generateReportExcel();
 		}
 		
 		  if (Integer.parseInt(reportType) == 2) {
