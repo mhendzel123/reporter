@@ -17,7 +17,9 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.commons.cli.*;
 import pl.edu.agh.mwo.java.Reports.Raport1;
+import pl.edu.agh.mwo.java.Reports.Raport2;
 import pl.edu.agh.mwo.java.dataObjects.Pracownik;
+import pl.edu.agh.mwo.java.dataObjects.Projekt;
 
 public class App {
 
@@ -55,11 +57,11 @@ public class App {
 		// generowanie listy pracownikow z ich projektami i zadaniami po plikach po podanej sciezce (rekursywnie)
 		File inputPath = new File(inputFilePath);
 		List<Pracownik> pracownicy = (new WorkbookLoader()).listaPracownikowZFolderu(inputPath);
-
+		List<Projekt> projekty = (new WorkbookLoader()).listaProjektowZFolderu(inputPath);
 		// tu mozna sprawdzic ze w przypypadku Jana Kowalskiego zadania zostsaly poprawnie dodane do odpowiadajacych im projektom
 		// oraz ze puste linie sa pomijane (02/Kowalski_Jan ma pusta)
 		pracownicy.forEach((pracownik) -> {
-			System.out.println(pracownik);
+			//System.out.println(pracownik);
 		});
 
 		// generowanie raportu nr 1
@@ -67,7 +69,12 @@ public class App {
 			Raport1 report1 = new Raport1(pracownicy);
 			report1.printReportConsole();
 		}
-
+		
+		  if (Integer.parseInt(reportType) == 2) {
+	            Raport2 report2 = new Raport2(projekty);
+	            report2.printReportConsole();
+	        }
+	
 
 	}
 }
