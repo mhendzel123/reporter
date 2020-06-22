@@ -19,49 +19,22 @@ public class Raport3 implements Raport {
     }
 
     public Map<String, float[]> generateReport() {
-        Map<String, Map<Projekt, Float>> pracownikProjektyCzas = new HashMap<>();
-        for (Pracownik pracownik : pracownicy) {
-            Map<Projekt, Float> hours = new HashMap<>();
-            String nazwaPracownika = pracownik.getNazwa();
-            for (Projekt projekt : pracownik.getListaProjektow()) {
-
-                hours.put(projekt, projekt.calkowityCzasPracyNadProjektem());
-
-            }
-            ;
-//            System.out.println(nazwaPracownika);
-//            for (Projekt p : hours.keySet()) {
-//                System.out.println(p.getNazwa() + " " + hours.get(p));
-//            }
-            pracownikProjektyCzas.put(nazwaPracownika, hours);
-
-        }
-//        for (String pracownik : pracownikProjektyCzas.keySet()) {
-//            System.out.println(pracownik);
-//            for (Projekt p : pracownikProjektyCzas.get(pracownik).keySet()) {
-//                System.out.println(p.getNazwa() + " " + pracownikProjektyCzas.get(pracownik).get(p));
-//            }
-//        }
         Map<String, float[]> report = new HashMap<>();
-        for (String name : pracownikProjektyCzas.keySet()) {
+        for (Pracownik pracownik : pracownicy) {
             float[] employeeHours = new float[projekty.size()];
             for (int i = 0; i < projekty.size(); i++) {
                 boolean containsProject = false;
-
-                for (Projekt projektPracownika : pracownikProjektyCzas.get(name).keySet()) {
+                for (Projekt projektPracownika : pracownik.getListaProjektow()) {
                     if (projekty.get(i).getNazwa().equals(projektPracownika.getNazwa())) {
-                        float hours = pracownikProjektyCzas.get(name).get(projektPracownika);
-                        // line += hours + "\t";
-                        employeeHours[i] = hours;
+                        employeeHours[i] = projektPracownika.calkowityCzasPracyNadProjektem();
                         containsProject = true;
                     }
                 }
                 if (!containsProject) {
-//                    line += "0\t";
                     employeeHours[i] = 0;
                 }
             }
-            report.put(name, employeeHours);
+            report.put(pracownik.getNazwa(), employeeHours);
         }
         return report;
     }
@@ -76,9 +49,7 @@ public class Raport3 implements Raport {
         System.out.println();
         Map<String, float[]> report = this.generateReport();
         for (String name : report.keySet()) {
-            // String line = name + "\t";
             System.out.print(name + "\t");
-//            float[] hours = new float[projekty.size()];
             for (float hours : report.get(name)) {
 
                 System.out.print(hours + "\t");
