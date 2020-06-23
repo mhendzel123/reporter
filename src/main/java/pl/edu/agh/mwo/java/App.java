@@ -19,6 +19,7 @@ import org.apache.commons.cli.*;
 import pl.edu.agh.mwo.java.Reports.Raport1;
 import pl.edu.agh.mwo.java.Reports.Raport2;
 import pl.edu.agh.mwo.java.Reports.Raport3;
+import pl.edu.agh.mwo.java.Reports.Raport4;
 import pl.edu.agh.mwo.java.dataObjects.Pracownik;
 import pl.edu.agh.mwo.java.dataObjects.Projekt;
 
@@ -76,16 +77,19 @@ public class App {
 	            Raport2 report2 = new Raport2(projekty);
 	            report2.printReportConsole();
 				report2.generateReportExcel();
-
 	        }
 		  
 		  if (Integer.parseInt(reportType) == 3) {
               Raport3 report3 = new Raport3(projekty, pracownicy);
               report3.printReportConsole();
               report3.generateReportExcel();
-
           }
-	
+		  
+		  if (Integer.parseInt(reportType) == 4) {
+              Raport4 report4 = new Raport4(projekty);
+              report4.printReportConsole();
+              report4.generateReportExcel();
+          }
 
 	}
 }
