@@ -1,7 +1,5 @@
 package pl.edu.agh.mwo.java.Reports;
 
-import java.time.LocalDate;
-
 public interface Raport {
 
     

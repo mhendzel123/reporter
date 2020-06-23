@@ -18,31 +18,25 @@ public class Raport3 implements Raport {
         this.pracownicy = pracownicy;
     }
 
-    public Map<String, Map<Projekt, Float>> generateReport() {
-        Map<String, Map<Projekt, Float>> pracownikProjektyCzas = new HashMap<>();
+    public Map<String, float[]> generateReport() {
+        Map<String, float[]> report = new HashMap<>();
         for (Pracownik pracownik : pracownicy) {
-            Map<Projekt, Float> hours = new HashMap<>();
-            String nazwaPracownika = pracownik.getNazwa();
-            for (Projekt projekt : pracownik.getListaProjektow()) {
-
-                hours.put(projekt, projekt.calkowityCzasPracyNadProjektem());
-
+            float[] employeeHours = new float[projekty.size()];
+            for (int i = 0; i < projekty.size(); i++) {
+                boolean containsProject = false;
+                for (Projekt projektPracownika : pracownik.getListaProjektow()) {
+                    if (projekty.get(i).getNazwa().equals(projektPracownika.getNazwa())) {
+                        employeeHours[i] = projektPracownika.calkowityCzasPracyNadProjektem();
+                        containsProject = true;
+                    }
+                }
+                if (!containsProject) {
+                    employeeHours[i] = 0;
+                }
             }
-            ;
-//            System.out.println(nazwaPracownika);
-//            for (Projekt p : hours.keySet()) {
-//                System.out.println(p.getNazwa() + " " + hours.get(p));
-//            }
-            pracownikProjektyCzas.put(nazwaPracownika, hours);
-
+            report.put(pracownik.getNazwa(), employeeHours);
         }
-//        for (String pracownik : pracownikProjektyCzas.keySet()) {
-//            System.out.println(pracownik);
-//            for (Projekt p : pracownikProjektyCzas.get(pracownik).keySet()) {
-//                System.out.println(p.getNazwa() + " " + pracownikProjektyCzas.get(pracownik).get(p));
-//            }
-//        }
-        return pracownikProjektyCzas;
+        return report;
     }
 
     @Override
@@ -50,42 +44,27 @@ public class Raport3 implements Raport {
         System.out.println("Raport 3");
         System.out.print("Pracownik ");
         for (Projekt projekt : projekty) {
-            System.out.print(projekt.getNazwa() + " ");
+            System.out.print(projekt.getNazwa() + "\t");
         }
         System.out.println();
-        Map<String, Map<Projekt, Float>> report = this.generateReport();
+        Map<String, float[]> report = this.generateReport();
         for (String name : report.keySet()) {
-            String line = name + "\t";
-//            float[] hours = new float[projekty.size()];
-            for (Projekt projekt : projekty) {
-                boolean containsProject = false;
-                
-                for (Projekt projektPracownika : report.get(name).keySet()) {
-                    if(projekt.getNazwa().equals(projektPracownika.getNazwa())) {
-                        float hours = report.get(name).get(projektPracownika);
-                        line += hours + "\t";
-                        containsProject = true;
-                    }
-                }
+            System.out.print(name + "\t");
+            for (float hours : report.get(name)) {
 
-                if (!containsProject) {
-                    line += "0\t";
-                }
+                System.out.print(hours + "\t");
             }
-//            for (float h : hours) {
-//                line += h + "\t";
-//            }
-            System.out.println(line);
-        }
+            System.out.println();
 
-        // report.forEach((key, value) -> System.out.println("Pracownik: " + key + ",
-        // całkowity czas pracy: " + value));
-        // TODO Auto-generated method stub
+            // report.forEach((key, value) -> System.out.println("Pracownik: " + key + ",
+            // całkowity czas pracy: " + value));
+            // TODO Auto-generated method stub
+        }
     }
 
     @Override
     public void generateReportExcel() {
-        // TODO Auto-generated method stub
+    	XlsCreator.createReportFile(this.generateReport(), "Projekt", projekty, "raport_3");
 
     }
 
