@@ -5,9 +5,7 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Projekt {
     private String nazwa;
@@ -56,6 +54,14 @@ public class Projekt {
             czasCalkowity = czasCalkowity + listaZadan.get(i).getCzasPracy();
         }
         return czasCalkowity;
+    }
+
+    public List<Date> datyWProjekcie() {
+        List<Date> daty = new ArrayList<>();
+        for (int i = 0; i < listaZadan.size(); i++) {
+            daty.add(listaZadan.get(i).getData());
+        }
+        return daty;
     }
 
     public boolean czyWierszPusty(Row wiersz) {
