@@ -1,29 +1,20 @@
 package pl.edu.agh.mwo.java;
 
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-
 import java.io.File;
-import java.io.IOException;
-import java.util.Set;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Collections;
 
-import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.commons.cli.*;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
 import pl.edu.agh.mwo.java.Reports.Raport1;
 import pl.edu.agh.mwo.java.Reports.Raport2;
 import pl.edu.agh.mwo.java.Reports.Raport3;
+import pl.edu.agh.mwo.java.Reports.Raport4;
 import pl.edu.agh.mwo.java.dataObjects.Pracownik;
 import pl.edu.agh.mwo.java.dataObjects.Projekt;
 
@@ -97,5 +88,11 @@ public class App {
 			report3.printReportConsole();
 			report3.generateReportExcel();
 		}
+		
+		if (Integer.parseInt(reportType) == 4) {
+            Raport4 report4 = new Raport4(projekty);
+            report4.printReportConsole();
+            report4.generateReportExcel();
+        }
 	}
 }
