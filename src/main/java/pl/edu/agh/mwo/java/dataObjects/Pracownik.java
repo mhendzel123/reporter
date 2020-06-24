@@ -4,6 +4,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Pracownik {
@@ -74,6 +75,14 @@ public class Pracownik {
             czasCalkowity = czasCalkowity + listaProjektow.get(i).calkowityCzasPracyNadProjektem();
         }
         return czasCalkowity;
+    }
+
+    public List<Date> datyZWszystkichProjektow() {
+        List<Date> daty = new ArrayList<>();
+        for (int i = 0; i < listaProjektow.size(); i++) {
+            daty.addAll(listaProjektow.get(i).datyWProjekcie());
+        }
+        return daty;
     }
 
     @Override

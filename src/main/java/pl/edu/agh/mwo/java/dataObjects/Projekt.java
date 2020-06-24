@@ -5,9 +5,7 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Projekt {
     private String nazwa;
@@ -58,16 +56,24 @@ public class Projekt {
         return czasCalkowity;
     }
 
-    public boolean czyWierszPusty(Row wiersz) {	//pusty lub błędny
+    public List<Date> datyWProjekcie() {
+        List<Date> daty = new ArrayList<>();
+        for (int i = 0; i < listaZadan.size(); i++) {
+            daty.add(listaZadan.get(i).getData());
+        }
+        return daty;
+    }
+
+    public boolean czyWierszPusty(Row wiersz) { //pusty lub błędny
         boolean pusty = false;
         for (int i = 0; i <= 2; i++) {
             Cell c = wiersz.getCell(i);
             if (c == null || c.getCellType() == CellType.BLANK ||
-            	wiersz.getCell(0).getCellType() == CellType.STRING || 
-            	wiersz.getCell(0).getNumericCellValue() < 1000 ||
-            	wiersz.getCell(1).getCellType() == CellType.NUMERIC ||
-            	wiersz.getCell(2).getCellType() == CellType.STRING ||
-            	wiersz.getCell(2).getNumericCellValue() > 1000) {
+                wiersz.getCell(0).getCellType() == CellType.STRING || 
+                wiersz.getCell(0).getNumericCellValue() < 1000 ||
+                wiersz.getCell(1).getCellType() == CellType.NUMERIC ||
+                wiersz.getCell(2).getCellType() == CellType.STRING ||
+                wiersz.getCell(2).getNumericCellValue() > 1000) {
                 pusty = true;
                 break;
             }
