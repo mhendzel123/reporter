@@ -56,7 +56,7 @@ public class Raport5 implements Raport {
         System.out.println("Suma godzin: " + this.getHoursSum());
         Map<String, Float> report = this.generateReport();
         for (String task : report.keySet()) {
-            System.out.println(task + "\t" + report.get(task));
+            System.out.format("%-60s %10.2f \n", task, report.get(task));
         }
     }
 
