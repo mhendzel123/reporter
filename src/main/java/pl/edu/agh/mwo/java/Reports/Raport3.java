@@ -42,19 +42,23 @@ public class Raport3 implements Raport {
     @Override
     public void printReportConsole() {
         System.out.println("Raport 3");
-        System.out.print("Pracownik ");
+        //System.out.format("%-50s %-15s %s \n", file.getName(), dirOrSize, creationDate);
+        System.out.format("%-25s", "Pracownik");
         for (Projekt projekt : projekty) {
-            System.out.print(projekt.getNazwa() + "\t");
+            System.out.format("%15s", projekt.getNazwa());
+            
         }
-        System.out.println();
+        System.out.format("%15s \n", "Suma godzin");
         Map<String, float[]> report = this.generateReport();
+        
         for (String name : report.keySet()) {
-            System.out.print(name + "\t");
+            float sum = 0;
+            System.out.format("%-25s", name);
             for (float hours : report.get(name)) {
-
-                System.out.print(hours + "\t");
+                sum += hours;
+                System.out.format("%15.2f", hours);
             }
-            System.out.println();
+            System.out.format("%15.2f \n", sum);
 
             // report.forEach((key, value) -> System.out.println("Pracownik: " + key + ",
             // całkowity czas pracy: " + value));
