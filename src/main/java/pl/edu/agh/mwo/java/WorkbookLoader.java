@@ -34,7 +34,7 @@ public class WorkbookLoader {
 				if (fileEntry.isDirectory()) {
 					listaPracownikowZFolderu(fileEntry);
 				} else {
-					String nazwaNowegoPracownika = fileEntry.getName().split(".xls")[0];
+					String nazwaNowegoPracownika = fileEntry.getName().split(".xls")[0].replace("_", " ");
 					Workbook nowyArkusz = WorkbookFactory.create(fileEntry);
 					Pracownik nowyPracownik = new Pracownik(nazwaNowegoPracownika, nowyArkusz);
 					if (listaPracownikow.size() == 0) {
