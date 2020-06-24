@@ -73,6 +73,7 @@ public class App {
 			Raport1 report1 = new Raport1(pracownicy);
 			report1.printReportConsole();
 			report1.generateReportExcel();
+			report1.generateReportChart();
 		}
 
 		// generowanie raportu nr 2
@@ -80,6 +81,7 @@ public class App {
 			Raport2 report2 = new Raport2(projekty);
 			report2.printReportConsole();
 			report2.generateReportExcel();
+			report2.generateReportChart();
 		}
 
 		// generowanie raportu nr 3

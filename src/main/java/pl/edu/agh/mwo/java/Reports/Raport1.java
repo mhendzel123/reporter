@@ -1,5 +1,6 @@
 package pl.edu.agh.mwo.java.Reports;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,5 +38,13 @@ public class Raport1 implements Raport {
     @Override
     public void generateReportExcel(){
     	XlsCreator.createReportFile(this.generateReport(), "Pracownik", "Całkowity czas pracy", "raport_1");
-        }        
+        }   
+    
+    public void generateReportChart() throws IOException{
+    	ChartCreator chartCreator=new ChartCreator();
+    	chartCreator.showChart(chartCreator.generateChart(this.generateReport(), "Raport 1", "Pracownicy",  "Liczba przepracowanych godzin"));
+        } 
+    
+    
     }
+
