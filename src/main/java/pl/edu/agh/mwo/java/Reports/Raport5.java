@@ -62,7 +62,7 @@ public class Raport5 implements Raport {
 
     @Override
     public void generateReportExcel() {
-        // TODO Auto-generated method stub
+    	XlsCreator.createReportFile(this.generateReport(), this.getHoursSum(), filter, "raport_5");
 
     }
 

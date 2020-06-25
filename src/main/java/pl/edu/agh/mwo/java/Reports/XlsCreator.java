@@ -43,7 +43,7 @@ public class XlsCreator {
                     
             }
                     
-        try (FileOutputStream outputStream = new FileOutputStream(outputFilename + ".xls")) {
+        try (FileOutputStream outputStream = new FileOutputStream(outputFilename + ".xlsx")) {
             workbook.write(outputStream);
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
@@ -71,6 +71,8 @@ public class XlsCreator {
 	        cell.setCellValue(projekt.getNazwa());
 	        i++;
 	        }
+	        cell = row.createCell(i);
+	        cell.setCellValue("Suma godzin");
 	  
 	        for (Map.Entry<String, float[]> entry : report.entrySet()) {          
 
@@ -81,18 +83,21 @@ public class XlsCreator {
 	                    cell.setCellValue((String) entry.getKey());
 	                    
 	                    int j = 1;
+	                    float sum = 0;
 	                    for(Float value : (float[]) entry.getValue()) {
 	                    	cell = row.createCell(j);
 	   	                    cell.setCellValue(value);
+	   	                    sum+=value;
 	                    	j++;
 	                    	
 	                    }
-	             	            
+	                    cell = row.createCell(j);
+   	                    cell.setCellValue(sum);      
 	              
 	                    
 	            }
 	                    
-	        try (FileOutputStream outputStream = new FileOutputStream(outputFilename + ".xls")) {
+	        try (FileOutputStream outputStream = new FileOutputStream(outputFilename + ".xlsx")) {
 	            workbook.write(outputStream);
 	        } catch (FileNotFoundException e) {
 	            // TODO Auto-generated catch block
@@ -134,7 +139,7 @@ public class XlsCreator {
 	                    
 	            }
 	                    
-	        try (FileOutputStream outputStream = new FileOutputStream(outputFilename + ".xls")) {
+	        try (FileOutputStream outputStream = new FileOutputStream(outputFilename + ".xlsx")) {
 	            workbook.write(outputStream);
 	        } catch (FileNotFoundException e) {
 	            // TODO Auto-generated catch block
@@ -145,4 +150,51 @@ public class XlsCreator {
 	        }
 			}
 		
+		
+		
+		public static void createReportFile(Map<String, Float> report, Float sum, String filter, String outputFilename){
+			
+			XSSFWorkbook workbook = new XSSFWorkbook();
+	        XSSFSheet sheet = workbook.createSheet("raport");
+	         
+	        Row row = sheet.createRow(0);
+	        Cell cell = row.createCell(0);
+	        cell.setCellValue("szukane wyrażenie:");
+	        cell = row.createCell(1);
+	        cell.setCellValue(filter);
+	        
+	        row = sheet.createRow(1);
+	        cell = row.createCell(0);
+	        cell.setCellValue("suma godzin:");
+	        cell = row.createCell(1);
+	        cell.setCellValue(sum);
+	  
+	        int rowCount = 1;
+
+	        for (String entry : report.keySet()) {
+
+				String[] fields = entry.split("\t");
+
+	            row = sheet.createRow(++rowCount);
+	             
+	            cell = row.createCell(0);
+	                    cell.setCellValue((String) fields[0]);
+	                    cell = row.createCell(1);
+	                    cell.setCellValue((String) fields[1]);
+	    	    cell = row.createCell(2);
+	                    cell.setCellValue((Float) report.get(entry));	              
+	            	                    
+	            }
+	                    
+	        try (FileOutputStream outputStream = new FileOutputStream(outputFilename + ".xlsx")) {
+	            workbook.write(outputStream);
+	        } catch (FileNotFoundException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+			}
+
 }

@@ -34,6 +34,11 @@ public class App {
         source.setRequired(true);
         options.addOption(report);
         
+        Option excel = new Option("x", "xls", false, "save xls file");
+        options.addOption(excel);
+        
+        
+        
         Option query = new Option("q", "query", true, "report 5 query");
         options.addOption(query);
         
@@ -80,7 +85,7 @@ public class App {
         if (Integer.parseInt(reportType) == 1) {
             Raport1 report1 = new Raport1(pracownicy);
             report1.printReportConsole();
-            report1.generateReportExcel();
+            if(cmd.hasOption("x")) report1.generateReportExcel();
             report1.generateReportChart();
         }
 
@@ -88,7 +93,7 @@ public class App {
         if (Integer.parseInt(reportType) == 2) {
             Raport2 report2 = new Raport2(projekty);
             report2.printReportConsole();
-            report2.generateReportExcel();
+            if(cmd.hasOption("x")) report2.generateReportExcel();
             report2.generateReportChart();
         }
 
@@ -96,13 +101,13 @@ public class App {
         if (Integer.parseInt(reportType) == 3) {
             Raport3 report3 = new Raport3(projekty, pracownicy);
             report3.printReportConsole();
-            report3.generateReportExcel();
+            if(cmd.hasOption("x")) report3.generateReportExcel();
         }
 
         if (Integer.parseInt(reportType) == 4) {
             Raport4 report4 = new Raport4(projekty);
             report4.printReportConsole();
-            report4.generateReportExcel();
+            if(cmd.hasOption("x"))  report4.generateReportExcel();
         }
 
         if (Integer.parseInt(reportType) == 5) {
@@ -111,7 +116,7 @@ public class App {
             } else {
             Raport5 report5 = new Raport5(projekty, queryReport5);
             report5.printReportConsole();
-            report5.generateReportExcel();
+            if(cmd.hasOption("x")) report5.generateReportExcel();
             }
         }
     }
