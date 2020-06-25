@@ -90,8 +90,9 @@ public class ErrorFinder {
 //                                    System.out.println(start.compareTo(c.getDateCellValue()));
                                     if (c.getCellType() == CellType.NUMERIC
                                             && (start.compareTo(c.getDateCellValue()) > 0 || end.compareTo(c.getDateCellValue()) <= 0)) {
+                                        String date = String.format("%tF", c.getDateCellValue());
                                         System.out.println("Incorrect date in: " + file.getAbsolutePath() + " "
-                                                + wb.getSheetName(wb.getSheetIndex(sheet)) + " " + c.getAddress());
+                                                + wb.getSheetName(wb.getSheetIndex(sheet)) + " " + c.getAddress() + ": " + date);
                                     }
 
                                 }
