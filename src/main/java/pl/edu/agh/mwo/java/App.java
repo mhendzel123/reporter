@@ -37,7 +37,11 @@ public class App {
         Option excel = new Option("x", "xls", false, "save xls file");
         options.addOption(excel);
         
+        Option saveChart = new Option("png", "chart png", false, "save chart as png");
+        options.addOption(saveChart);  
         
+        Option displayChart = new Option("ch", "display chart", false, "display chart");
+        options.addOption(displayChart); 
         
         Option query = new Option("q", "query", true, "report 5 query");
         options.addOption(query);
@@ -89,7 +93,8 @@ public class App {
             Raport1 report1 = new Raport1(pracownicy);
             report1.printReportConsole();
             if(cmd.hasOption("x")) report1.generateReportExcel();
-            report1.generateReportChart();
+            if(cmd.hasOption("ch")) report1.generateReportChart();
+            if(cmd.hasOption("png")) report1.saveReportChart();
         }
 
         // generowanie raportu nr 2
@@ -97,7 +102,8 @@ public class App {
             Raport2 report2 = new Raport2(projekty);
             report2.printReportConsole();
             if(cmd.hasOption("x")) report2.generateReportExcel();
-            report2.generateReportChart();
+            if(cmd.hasOption("ch")) report2.generateReportChart();
+            if(cmd.hasOption("png")) report2.saveReportChart();
         }
 
         // generowanie raportu nr 3
@@ -105,6 +111,8 @@ public class App {
             Raport3 report3 = new Raport3(projekty, pracownicy);
             report3.printReportConsole();
             if(cmd.hasOption("x")) report3.generateReportExcel();
+            if(cmd.hasOption("ch")) report3.generateReportChart();
+            if(cmd.hasOption("png")) report3.saveReportChart();
         }
 
         if (Integer.parseInt(reportType) == 4) {
