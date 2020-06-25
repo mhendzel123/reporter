@@ -34,8 +34,8 @@ public class App {
         source.setRequired(true);
         options.addOption(report);
         
-        Option report5filter = new Option("r5f", "report5filter", true, "report 5 filter");
-        options.addOption(report5filter);
+        Option query = new Option("q", "query", true, "report 5 query");
+        options.addOption(query);
         
 
         CommandLineParser parser = new DefaultParser();
@@ -52,11 +52,8 @@ public class App {
 
         String inputFilePath = cmd.getOptionValue("source");
         String reportType = cmd.getOptionValue("report");
-        String report5filterString = cmd.getOptionValue("report5filter");
+        String queryReport5 = cmd.getOptionValue("query");
 
-        if (Integer.parseInt(reportType) == 5) {
-            
-        }
 
 //		System.out.println(inputFilePath);
 //		System.out.println(reportType);
@@ -77,6 +74,7 @@ public class App {
         File[] files = new File(inputFilePath).listFiles();
         ErrorFinder finder = new ErrorFinder();
         finder.findErrors(files);
+        finder.checkDates(files);
 
         // generowanie raportu nr 1
         if (Integer.parseInt(reportType) == 1) {
@@ -108,10 +106,10 @@ public class App {
         }
 
         if (Integer.parseInt(reportType) == 5) {
-            if (report5filterString == null) {
-                System.out.println("Podaj szukane wyrażenie (-r5f)");
+            if (queryReport5 == null) {
+                System.out.println("Podaj szukane wyrażenie -q");
             } else {
-            Raport5 report5 = new Raport5(projekty, report5filterString);
+            Raport5 report5 = new Raport5(projekty, queryReport5);
             report5.printReportConsole();
             report5.generateReportExcel();
             }

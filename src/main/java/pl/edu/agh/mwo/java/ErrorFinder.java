@@ -2,6 +2,9 @@ package pl.edu.agh.mwo.java;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Cell;
@@ -60,4 +63,50 @@ public class ErrorFinder {
 			}
 		}
 	}
+	
+    public void checkDates(File[] files) {
+        for (File file : files) {
+            if (file.isDirectory()) {
+                checkDates(file.listFiles());
+            } else {
+                try {
+                    Workbook wb = WorkbookFactory.create(file);
+                    String path[] = file.getAbsolutePath().split("\\\\");
+                    try {
+                    int month = Integer.parseInt(path[path.length - 2]);
+                    int year = Integer.parseInt(path[path.length - 3]);
+                    LocalDate startDate = LocalDate.of(year, month, 1);
+                    LocalDate endDate = startDate.plusMonths(1);
+                    Date start = Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                    Date end = Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+//                  System.out.println(start);
+//                  System.out.println(end);
+                    for (Sheet sheet : wb) {
+                        for (Row row : sheet) {
+                            //for (int i = 0; i <= 2; i++) {
+                                Cell c = row.getCell(0);
+                                if (row.getRowNum() >= 1) {
+//                                    System.out.println(start + " " + c.getDateCellValue());
+//                                    System.out.println(start.compareTo(c.getDateCellValue()));
+                                    if (c.getCellType() == CellType.NUMERIC
+                                            && (start.compareTo(c.getDateCellValue()) > 0 || end.compareTo(c.getDateCellValue()) <= 0)) {
+                                        System.out.println("Incorrect date in: " + file.getAbsolutePath() + " "
+                                                + wb.getSheetName(wb.getSheetIndex(sheet)) + " " + c.getAddress());
+                                    }
+
+                                }
+                            }
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Incorrect folder name: " + file.getAbsolutePath());
+                    }
+                    
+                } catch (EncryptedDocumentException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
