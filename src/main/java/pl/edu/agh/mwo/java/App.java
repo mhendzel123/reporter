@@ -75,7 +75,10 @@ public class App {
         ErrorFinder finder = new ErrorFinder();
         finder.findErrors(files);
         finder.checkDates(files);
-
+        
+        RangeOfDatesPrinter printer = new RangeOfDatesPrinter(projekty);
+        printer.printDates();
+        
         // generowanie raportu nr 1
         if (Integer.parseInt(reportType) == 1) {
             Raport1 report1 = new Raport1(pracownicy);
