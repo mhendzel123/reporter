@@ -1,5 +1,6 @@
 package pl.edu.agh.mwo.java.Reports;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,5 +72,12 @@ public class Raport3 implements Raport {
     	XlsCreator.createReportFile(this.generateReport(), "Projekt", projekty, "raport_3");
 
     }
+    
+    
+    public void generateReportChart() throws IOException{
+        ChartCreator chartCreator=new ChartCreator();
+        chartCreator.showChart(chartCreator.generateChart(this.generateReport(), this.projekty));
+        } 
+    
 
 }

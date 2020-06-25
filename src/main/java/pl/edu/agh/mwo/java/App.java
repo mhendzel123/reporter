@@ -97,6 +97,7 @@ public class App {
             Raport3 report3 = new Raport3(projekty, pracownicy);
             report3.printReportConsole();
             report3.generateReportExcel();
+            report3.generateReportChart();
         }
 
         if (Integer.parseInt(reportType) == 4) {

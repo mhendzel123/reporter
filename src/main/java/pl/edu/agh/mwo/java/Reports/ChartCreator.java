@@ -1,7 +1,9 @@
 package pl.edu.agh.mwo.java.Reports;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.knowm.xchart.BitmapEncoder;
@@ -9,7 +11,10 @@ import org.knowm.xchart.BitmapEncoder.BitmapFormat;
 import org.knowm.xchart.CategoryChart;
 import org.knowm.xchart.CategoryChartBuilder;
 import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.style.Styler.ChartTheme;
 import org.knowm.xchart.style.Styler.LegendPosition;
+
+import pl.edu.agh.mwo.java.dataObjects.Projekt;
 
 public class ChartCreator {
     public CategoryChart generateChart(Map<String,Float> report, String title, String xAxis, String yAxis) throws IOException {
@@ -35,10 +40,27 @@ public class ChartCreator {
         //displayChart.displayChart();
     }
 
-    public void saveReportAsChartPNG(Map<String,Float> report) throws IOException {
-        BitmapEncoder.saveBitmap(generateChart(report, "Raport 1", "Pracownicy",  "Liczba przepracowanych godzin"), "./Employee_Chart", BitmapFormat.PNG);
+
+
+    public CategoryChart generateChart(Map<String, float[]> report, List<Projekt> projekty) {
+
+        ArrayList<Float> hh = new ArrayList<>();
+        ArrayList<String> pr = new ArrayList<>();
+        CategoryChart chart = new CategoryChartBuilder().width(800).height(600).title("Projects vs. Number of hours")
+                .xAxisTitle("Projects").yAxisTitle("Hours").theme(ChartTheme.GGPlot2).build();
+
+        for (Projekt projekt : projekty) {
+            pr.add(projekt.getNazwa());
+        }
+        for (String entry : report.keySet()) {
+            for (float hours : report.get(entry)) {
+                hh.add(hours);
+            }
+            chart.addSeries(entry, pr, hh);
+            hh.clear();
+        }
+        return chart;
     }
-	
-	
+
 	
 }
