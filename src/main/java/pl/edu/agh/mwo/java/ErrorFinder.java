@@ -22,27 +22,31 @@ public class ErrorFinder {
 					Workbook wb = WorkbookFactory.create(file);
 					for (Sheet sheet : wb) {
 						for (Row row : sheet) {
-							for (Cell c : row) {
+							for (int i = 0; i <= 2; i++) {
+					            Cell c = row.getCell(i);								
 								if (row.getRowNum() >= 1) {
 									if (c == null || c.getCellType() == CellType.BLANK) {
-										System.out.println("Error in: " + file.getAbsolutePath() + " "	+ wb.getSheetName(wb.getSheetIndex(sheet)) + " " + c.getAddress());
+										if (i == 0) {
+										System.out.println("Error in: " + file.getAbsolutePath() + " "	+ wb.getSheetName(wb.getSheetIndex(sheet)) + " " + "A" + (row.getRowNum()+1));
+										} else if (i == 1){
+											System.out.println("Error in: " + file.getAbsolutePath() + " "	+ wb.getSheetName(wb.getSheetIndex(sheet)) + " " + "B" + (row.getRowNum()+1));
+										} else if (i == 2){
+											System.out.println("Error in: " + file.getAbsolutePath() + " "	+ wb.getSheetName(wb.getSheetIndex(sheet)) + " " + "C" + (row.getRowNum()+1));
+										}
+									} else if (c.getColumnIndex() == 0 && c.getCellType() == CellType.STRING) {
+										System.out.println("Error in: " + file.getAbsolutePath() + " " + wb.getSheetName(wb.getSheetIndex(sheet)) + " " + c.getAddress());
+									} else if (c.getColumnIndex() == 0 && c.getCellType() == CellType.NUMERIC && c.getNumericCellValue() < 1000) {
+										System.out.println("Error in: " + file.getAbsolutePath() + " " + wb.getSheetName(wb.getSheetIndex(sheet)) + " " + c.getAddress());
+									} 
+									else if (c.getColumnIndex() == 1 && c.getCellType() == CellType.NUMERIC) {
+										System.out.println("Error in: " + file.getAbsolutePath() + " " + wb.getSheetName(wb.getSheetIndex(sheet)) + " " + c.getAddress());
+									}  else if (c.getColumnIndex() == 1 && c.getCellType() == CellType.BLANK) {
+										System.out.println("Error in: " + file.getAbsolutePath() + " " + wb.getSheetName(wb.getSheetIndex(sheet)) + " " + c.getAddress());
 									}
-									if (c.getColumnIndex() == 0 && c.getCellType() == CellType.STRING) {
-										System.out.println("Error in: " + file.getAbsolutePath() + " "	+ wb.getSheetName(wb.getSheetIndex(sheet)) + " " + c.getAddress());
-									}
-									if (c.getColumnIndex() == 0 && c.getCellType() == CellType.NUMERIC && c.getNumericCellValue() < 1000) {
-										System.out.println("Error in: " + file.getAbsolutePath() + " "	+ wb.getSheetName(wb.getSheetIndex(sheet)) + " " + c.getAddress());
-									}
-									
-									if (c.getColumnIndex() == 1 && c.getCellType() == CellType.NUMERIC) {
-										System.out.println("Error in: " + file.getAbsolutePath() + " "	+ wb.getSheetName(wb.getSheetIndex(sheet)) + " " + c.getAddress());
-									}
-									
-									if (c.getColumnIndex() == 2 && c.getCellType() == CellType.STRING) {
-										System.out.println("Error in: " + file.getAbsolutePath() + " "	+ wb.getSheetName(wb.getSheetIndex(sheet)) + " " + c.getAddress());
-									}
-									if (c.getColumnIndex() == 2 && c.getCellType() == CellType.NUMERIC && c.getNumericCellValue() > 1000) {
-										System.out.println("Error in: " + file.getAbsolutePath() + " "	+ wb.getSheetName(wb.getSheetIndex(sheet)) + " " + c.getAddress());
+									else if (c.getColumnIndex() == 2 && c.getCellType() == CellType.STRING) {
+										System.out.println("Error in: " + file.getAbsolutePath() + " " + wb.getSheetName(wb.getSheetIndex(sheet)) + " " + c.getAddress());
+									} else if (c.getColumnIndex() == 2 && c.getCellType() == CellType.NUMERIC && c.getNumericCellValue() > 1000) {
+										System.out.println("Error in: " + file.getAbsolutePath() + " " + wb.getSheetName(wb.getSheetIndex(sheet)) + " " + c.getAddress());
 									}
 								}
 							}

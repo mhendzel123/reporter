@@ -64,18 +64,28 @@ public class Projekt {
         return daty;
     }
 
-    public boolean czyWierszPusty(Row wiersz) { //pusty lub błędny
+    public boolean czyWierszPusty(Row wiersz) {	//pusty lub błędny
         boolean pusty = false;
         for (int i = 0; i <= 2; i++) {
             Cell c = wiersz.getCell(i);
-            if (c == null || c.getCellType() == CellType.BLANK ||
-                wiersz.getCell(0).getCellType() == CellType.STRING || 
-                wiersz.getCell(0).getNumericCellValue() < 1000 ||
-                wiersz.getCell(1).getCellType() == CellType.NUMERIC ||
-                wiersz.getCell(2).getCellType() == CellType.STRING ||
-                wiersz.getCell(2).getNumericCellValue() > 1000) {
-                pusty = true;
-                break;
+            if (c == null || c.getCellType() == CellType.BLANK) { 
+            	pusty = true;
+            	break;
+			} else if (c.getColumnIndex() == 0 && c.getCellType() == CellType.STRING) {
+	            pusty = true;
+	            break;
+			} else if (c.getColumnIndex() == 0 && c.getCellType() == CellType.NUMERIC && c.getNumericCellValue() < 1000) {
+	            pusty = true;
+	            break;
+			} else if (c.getColumnIndex() == 1 && c.getCellType() == CellType.NUMERIC) {
+	            pusty = true;
+	            break;
+			} else if (c.getColumnIndex() == 2 && c.getCellType() == CellType.STRING) {
+	            pusty = true;
+	            break;
+			} else if (c.getColumnIndex() == 2 && c.getCellType() == CellType.NUMERIC && c.getNumericCellValue() > 1000) {
+	            pusty = true;
+	            break;
             }
         }
         return pusty;
