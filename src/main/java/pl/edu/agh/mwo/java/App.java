@@ -45,12 +45,12 @@ public class App {
 
 			Option query = new Option("q", "query", true, "report 5 query");
 			options.addOption(query);
-			
-	        Option employeeFilter = new Option("ef", "employeeFilter", true, "employee filter");
-	        options.addOption(employeeFilter);
-	        
-	        Option projectFilter = new Option("pf", "projectFilter", true, "project filter");
-	        options.addOption(projectFilter);
+
+			Option employeeFilter = new Option("ef", "employeeFilter", true, "employee filter");
+			options.addOption(employeeFilter);
+
+			Option projectFilter = new Option("pf", "projectFilter", true, "project filter");
+			options.addOption(projectFilter);
 
 			CommandLineParser parser = new DefaultParser();
 			HelpFormatter formatter = new HelpFormatter();
@@ -59,7 +59,7 @@ public class App {
 			try {
 				cmd = parser.parse(options, args);
 			} catch (ParseException e) {
-				System.out.println("Błąd w poleceniu, nie mogę wygenerować raporu, spróbuj jeszcze raz!");
+				System.out.println("Błąd w poleceniu, nie mogę wygenerować raportu, spróbuj jeszcze raz!");
 				formatter.printHelp("utility-name", options);
 				System.exit(1);
 			}
@@ -67,30 +67,25 @@ public class App {
 			String inputFilePath = cmd.getOptionValue("source");
 			String reportType = cmd.getOptionValue("report");
 			String queryReport5 = cmd.getOptionValue("query");
-	        String employeeFilterString = cmd.getOptionValue("employeeFilter");
-	        String projectFilterString = cmd.getOptionValue("projectFilter");
+			String employeeFilterString = cmd.getOptionValue("employeeFilter");
+			String projectFilterString = cmd.getOptionValue("projectFilter");
 
-//		System.out.println(inputFilePath);
-//		System.out.println(reportType);
-
-			// generowanie listy pracownikow z ich projektami i zadaniami po plikach po
-			// podanej sciezce (rekursywnie)
-	        File inputPath = new File(inputFilePath);
-	        List<Projekt> projekty;
-	        List<Pracownik> pracownicy;
-	        if (employeeFilterString == null) {
-	            pracownicy = (new WorkbookLoader()).listaPracownikowZFolderu(inputPath, "");
-	        } else {
-	            pracownicy = (new WorkbookLoader()).listaPracownikowZFolderu(inputPath, employeeFilterString.toLowerCase());
-	        }
-	        if (projectFilterString == null) {
-	            projekty = (new WorkbookLoader()).listaProjektowZFolderu(inputPath, "");
-	        } else {
-	            projekty = (new WorkbookLoader()).listaProjektowZFolderu(inputPath, projectFilterString.toLowerCase());
-	        }
-			// tu mozna sprawdzic ze w przypypadku Jana Kowalskiego zadania zostsaly
-			// poprawnie dodane do odpowiadajacych im projektom
-			// oraz ze puste linie sa pomijane (02/Kowalski_Jan ma pusta)
+			// generowanie listy pracownikow z ich projektami i zadaniami po plikach po podanej sciezce (rekursywnie)
+			File inputPath = new File(inputFilePath);
+			List<Projekt> projekty;
+			List<Pracownik> pracownicy;
+			if (employeeFilterString == null) {
+				pracownicy = (new WorkbookLoader()).listaPracownikowZFolderu(inputPath, "");
+			} else {
+				pracownicy = (new WorkbookLoader()).listaPracownikowZFolderu(inputPath,
+						employeeFilterString.toLowerCase());
+			}
+			if (projectFilterString == null) {
+				projekty = (new WorkbookLoader()).listaProjektowZFolderu(inputPath, "");
+			} else {
+				projekty = (new WorkbookLoader()).listaProjektowZFolderu(inputPath, projectFilterString.toLowerCase());
+			}
+			// tu mozna sprawdzic ze w przypypadku Jana Kowalskiego zadania zostsaly poprawnie dodane do odpowiadajacych im projektom oraz ze puste linie sa pomijane (02/Kowalski_Jan ma pusta)
 			pracownicy.forEach((pracownik) -> {
 //			 System.out.println(pracownik);
 			});
@@ -121,45 +116,63 @@ public class App {
 			}
 
 			// generowanie raportu nr 2
-			if (Integer.parseInt(reportType) == 2) {
-				Raport2 report2 = new Raport2(projekty);
-				report2.printReportConsole();
-				if (cmd.hasOption("x"))
-					report2.generateReportExcel();
-				if (cmd.hasOption("ch"))
-					report2.generateReportChart();
-				if (cmd.hasOption("png"))
-					report2.saveReportChart();
+			try {
+				if (Integer.parseInt(reportType) == 2) {
+					Raport2 report2 = new Raport2(projekty);
+					report2.printReportConsole();
+					if (cmd.hasOption("x"))
+						report2.generateReportExcel();
+					if (cmd.hasOption("ch"))
+						report2.generateReportChart();
+					if (cmd.hasOption("png"))
+						report2.saveReportChart();
+				}
+			} catch (Exception ex1) {
+				System.out.println("Błąd w poleceniu, nie mogę wygenerować raportu, spróbuj jeszcze raz!");
 			}
 
 			// generowanie raportu nr 3
-			if (Integer.parseInt(reportType) == 3) {
-				Raport3 report3 = new Raport3(projekty, pracownicy);
-				report3.printReportConsole();
-				if (cmd.hasOption("x"))
-					report3.generateReportExcel();
-				if (cmd.hasOption("ch"))
-					report3.generateReportChart();
-				if (cmd.hasOption("png"))
-					report3.saveReportChart();
-			}
-
-			if (Integer.parseInt(reportType) == 4) {
-				Raport4 report4 = new Raport4(projekty);
-				report4.printReportConsole();
-				if (cmd.hasOption("x"))
-					report4.generateReportExcel();
-			}
-
-			if (Integer.parseInt(reportType) == 5) {
-				if (queryReport5 == null) {
-					System.out.println("Podaj szukane wyrażenie -q");
-				} else {
-					Raport5 report5 = new Raport5(projekty, queryReport5);
-					report5.printReportConsole();
+			try {
+				if (Integer.parseInt(reportType) == 3) {
+					Raport3 report3 = new Raport3(projekty, pracownicy);
+					report3.printReportConsole();
 					if (cmd.hasOption("x"))
-						report5.generateReportExcel();
+						report3.generateReportExcel();
+					if (cmd.hasOption("ch"))
+						report3.generateReportChart();
+					if (cmd.hasOption("png"))
+						report3.saveReportChart();
 				}
+			} catch (Exception ex1) {
+				System.out.println("Błąd w poleceniu, nie mogę wygenerować raportu, spróbuj jeszcze raz!");
+			}
+
+			// generowanie raportu nr 4
+			try {
+				if (Integer.parseInt(reportType) == 4) {
+					Raport4 report4 = new Raport4(projekty);
+					report4.printReportConsole();
+					if (cmd.hasOption("x"))
+						report4.generateReportExcel();
+				}
+			} catch (Exception ex1) {
+				System.out.println("Błąd w poleceniu, nie mogę wygenerować raportu, spróbuj jeszcze raz!");
+			}
+
+			// generowanie raportu nr 5
+			try {
+				if (Integer.parseInt(reportType) == 5) {
+					if (queryReport5 == null) {
+						System.out.println("Podaj szukane wyrażenie -q");
+					} else {
+						Raport5 report5 = new Raport5(projekty, queryReport5);
+						report5.printReportConsole();
+						if (cmd.hasOption("x"))
+							report5.generateReportExcel();
+					}
+				}
+			} catch (Exception ex1) {
+				System.out.println("Błąd w poleceniu, nie mogę wygenerować raportu, spróbuj jeszcze raz!");
 			}
 
 		} catch (Exception eMain) {
