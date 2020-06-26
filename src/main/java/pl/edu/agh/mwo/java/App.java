@@ -45,6 +45,12 @@ public class App {
 
 			Option query = new Option("q", "query", true, "report 5 query");
 			options.addOption(query);
+			
+	        Option employeeFilter = new Option("ef", "employeeFilter", true, "employee filter");
+	        options.addOption(employeeFilter);
+	        
+	        Option projectFilter = new Option("pf", "projectFilter", true, "project filter");
+	        options.addOption(projectFilter);
 
 			CommandLineParser parser = new DefaultParser();
 			HelpFormatter formatter = new HelpFormatter();
@@ -61,15 +67,27 @@ public class App {
 			String inputFilePath = cmd.getOptionValue("source");
 			String reportType = cmd.getOptionValue("report");
 			String queryReport5 = cmd.getOptionValue("query");
+	        String employeeFilterString = cmd.getOptionValue("employeeFilter");
+	        String projectFilterString = cmd.getOptionValue("projectFilter");
 
 //		System.out.println(inputFilePath);
 //		System.out.println(reportType);
 
 			// generowanie listy pracownikow z ich projektami i zadaniami po plikach po
 			// podanej sciezce (rekursywnie)
-			File inputPath = new File(inputFilePath);
-			List<Pracownik> pracownicy = (new WorkbookLoader()).listaPracownikowZFolderu(inputPath);
-			List<Projekt> projekty = (new WorkbookLoader()).listaProjektowZFolderu(inputPath);
+	        File inputPath = new File(inputFilePath);
+	        List<Projekt> projekty;
+	        List<Pracownik> pracownicy;
+	        if (employeeFilterString == null) {
+	            pracownicy = (new WorkbookLoader()).listaPracownikowZFolderu(inputPath, "");
+	        } else {
+	            pracownicy = (new WorkbookLoader()).listaPracownikowZFolderu(inputPath, employeeFilterString);
+	        }
+	        if (projectFilterString == null) {
+	            projekty = (new WorkbookLoader()).listaProjektowZFolderu(inputPath, "");
+	        } else {
+	            projekty = (new WorkbookLoader()).listaProjektowZFolderu(inputPath, projectFilterString);
+	        }
 			// tu mozna sprawdzic ze w przypypadku Jana Kowalskiego zadania zostsaly
 			// poprawnie dodane do odpowiadajacych im projektom
 			// oraz ze puste linie sa pomijane (02/Kowalski_Jan ma pusta)
