@@ -81,12 +81,12 @@ public class App {
 	        if (employeeFilterString == null) {
 	            pracownicy = (new WorkbookLoader()).listaPracownikowZFolderu(inputPath, "");
 	        } else {
-	            pracownicy = (new WorkbookLoader()).listaPracownikowZFolderu(inputPath, employeeFilterString);
+	            pracownicy = (new WorkbookLoader()).listaPracownikowZFolderu(inputPath, employeeFilterString.toLowerCase());
 	        }
 	        if (projectFilterString == null) {
 	            projekty = (new WorkbookLoader()).listaProjektowZFolderu(inputPath, "");
 	        } else {
-	            projekty = (new WorkbookLoader()).listaProjektowZFolderu(inputPath, projectFilterString);
+	            projekty = (new WorkbookLoader()).listaProjektowZFolderu(inputPath, projectFilterString.toLowerCase());
 	        }
 			// tu mozna sprawdzic ze w przypypadku Jana Kowalskiego zadania zostsaly
 			// poprawnie dodane do odpowiadajacych im projektom
