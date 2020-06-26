@@ -19,7 +19,7 @@ public class RangeOfDatesPrinter {
       Date minData = Collections.min(wszystkieDatyZProjektowWszystkichPracownikow);
       Date maxData = Collections.max(wszystkieDatyZProjektowWszystkichPracownikow);
 
-      this.daty = String.format("Zakres dat od %tF do %tF", minData, maxData);
+      this.daty = String.format("\nZakres dat od %tF do %tF", minData, maxData);
     }
 
 	public void printDates() {

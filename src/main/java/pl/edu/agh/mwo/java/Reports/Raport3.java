@@ -42,7 +42,7 @@ public class Raport3 implements Raport {
 
     @Override
     public void printReportConsole() {
-        System.out.println("Raport 3");
+        System.out.println("\nRaport 3\n");
         //System.out.format("%-50s %-15s %s \n", file.getName(), dirOrSize, creationDate);
         System.out.format("%-25s", "Pracownik");
         for (Projekt projekt : projekty) {
@@ -65,6 +65,8 @@ public class Raport3 implements Raport {
             // całkowity czas pracy: " + value));
             // TODO Auto-generated method stub
         }
+        System.out.println("\n-----------------------------------"); 
+        System.out.println("Raport gotowy!\n"); 
     }
 
     @Override

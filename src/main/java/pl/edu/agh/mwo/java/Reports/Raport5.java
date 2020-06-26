@@ -51,13 +51,15 @@ public class Raport5 implements Raport {
     
     @Override
     public void printReportConsole() {
-        System.out.println("Raport 5");
-        System.out.println("Szukane wyrażenie: " + filter);
+        System.out.println("\nRaport 5");
+        System.out.println("Szukane wyrażenie: " + filter + "\n");
         System.out.println("Suma godzin: " + this.getHoursSum());
         Map<String, Float> report = this.generateReport();
         for (String task : report.keySet()) {
             System.out.format("%-60s %10.2f \n", task, report.get(task));
         }
+    	System.out.println("-----------------------------------"); 
+        System.out.println("Raport gotowy!"); 
     }
 
     @Override

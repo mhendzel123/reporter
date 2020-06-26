@@ -30,10 +30,13 @@ public class Raport1 implements Raport {
 
     @Override
     public void printReportConsole() {
-        System.out.println("Raport 1");
+        System.out.println("\nRaport 1\n");
         Map<String, Float> report = this.generateReport();
         report.forEach((key, value) -> System.out.println("Pracownik: " + key + ", całkowity czas pracy: " + value));
         // TODO Auto-generated method stub
+    	System.out.println("\n-----------------------------------"); 
+        System.out.println("Raport gotowy!\n"); 
+
     }
 
     @Override

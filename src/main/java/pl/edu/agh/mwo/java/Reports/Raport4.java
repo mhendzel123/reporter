@@ -54,7 +54,7 @@ public class Raport4 implements Raport {
 
 	@Override
 	public void printReportConsole() {
-		System.out.println("Raport 4 - TOP 20");
+		System.out.println("\nRaport 4 - TOP 20\n");
 		
 		int maxLenProject = 0, maxLenTask = 0;
 		LinkedHashMap<String, Float> report = this.generateReport();
@@ -85,9 +85,10 @@ public class Raport4 implements Raport {
 				System.out.print(" ");
 			
 			System.out.println("   " + entry.getValue());
-	}
-
-		
+			
+		}
+	    	System.out.println("\n-----------------------------------"); 
+	        System.out.println("Raport gotowy!\n"); 
 	    
 
 	}
