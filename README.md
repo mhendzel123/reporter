@@ -52,15 +52,15 @@ https://github.com/mhendzel123/reporter/raw/report5/target/reporter-1.0-SNAPSHOT
 
 
 **Przykłady użycia:**
-1.	Generowanie raportu 1 na konsolę dla plików w folderze resources (wraz z podfolderami)
+1.	Generowanie raportu 1 na konsolę dla plików w folderze resources (wraz z podfolderami):
 
 java -jar target\reporter-1.0-SNAPSHOT-jar-with-dependencies.jar -s src\main\resources -r 1
 
-2.	Generowanie raportu 5 wyszukującego zadania ze słowem „projekt”, zapisanie go w pliku xls oraz zapisanie wykresu w pliku png
+2.	Generowanie raportu 5 wyszukującego zadania ze słowem „projekt”, zapisanie go w pliku xls oraz zapisanie wykresu w pliku png:
 
 java -jar target\reporter-1.0-SNAPSHOT-jar-with-dependencies.jar -s src\main\resources -r 5 -q projekt -x -png
 
-3.	Generowanie raportu 3 dla pracowników, których nazwisko zawiera frazę “Nowak” i projektów, których nazwa zawiera frazę „Projekt2”
+3.	Generowanie raportu 3 dla pracowników, których nazwisko zawiera frazę “Nowak” i projektów, których nazwa zawiera frazę „Projekt2”:
 
 java -jar target\reporter-1.0-SNAPSHOT-jar-with-dependencies.jar -s src\main\resources -r 3 -ef Nowak -pf Projekt2
 
