@@ -29,7 +29,7 @@ https://github.com/mhendzel123/reporter/raw/report5/target/reporter-1.0-SNAPSHOT
 **Wymagane:**
 -s <ścieżka do katalogu źródłowego>
 
--r <typ raportu> (dostępne wartości od 1 do 5)
+-r \<typ raportu\> (dostępne wartości od 1 do 5)
 
 -q <wyszukiwana fraza> (parametr tylko dla raportu 5, można podać tylko jedną wyszukiwaną frazę, wielkość znaków nie ma znaczenia)
 
