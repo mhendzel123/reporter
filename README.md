@@ -19,7 +19,6 @@ Przykład:
 
 
 
-\
 
 **Instrukcja:**
 
@@ -27,7 +26,6 @@ Program uruchamiany jest z wiersza poleceń.
 Plik do pobrania dostępny jest: 
 https://github.com/mhendzel123/reporter/raw/report5/target/reporter-1.0-SNAPSHOT-jar-with-dependencies.jar
 
-\
 
 **Polecenia do generowania poszczególnych raportów:**
 
@@ -51,7 +49,7 @@ https://github.com/mhendzel123/reporter/raw/report5/target/reporter-1.0-SNAPSHOT
 
 -pf \<tekst\> (dla raportów 2 - 5, wygenerują się tylko dla projektów, których nazwa zawiera podany tekst, można podać tylko jedną wyszukiwaną frazę, wielkość znaków nie ma znaczenia)
 
-\
+
 
 **Przykłady użycia:**
 1.	Generowanie raportu 1 na konsolę dla plików w folderze resources (wraz z podfolderami)
