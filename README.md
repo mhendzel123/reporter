@@ -9,7 +9,7 @@ Program Reporter sluzy do analizy godzin pracy pracowników w poszczególnych pr
 
 Jeden plik dotyczy jednego pracownika. Nazwa pliku musi być zgodna z poniższym szablonem:
 Nazwisko_Imię.xls (np. Kowalski_Jan.xls)
-Nawza projektu powinna być nazwą arkusza w pliku excela. W pierwszej kolumnie umieszczamy datę, w drugiej nazwę zadania, w trzeciej ilość godzin. Pierwszy wiersz zawsze jest nagłówkiem.
+Nawza projektu powinna być nazwą arkusza w pliku excela. W pierwszej kolumnie umieszczamy datę, w drugiej nazwę zadania, w trzeciej liczba godzin. Pierwszy wiersz zawsze jest nagłówkiem.
 
 Przykład:
  
