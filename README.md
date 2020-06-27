@@ -46,6 +46,8 @@ https://github.com/mhendzel123/reporter/raw/report5/target/reporter-1.0-SNAPSHOT
 
 -pf \<tekst\> (dla raportów 2 - 5, wygenerują się tylko dla projektów, których nazwa zawiera podany tekst, można podać tylko jedną wyszukiwaną frazę, wielkość znaków nie ma znaczenia)
 
+\
+\
 
 **Przykłady użycia:**
 1.	Generowanie raportu 1 na konsolę dla plików w folderze resources (wraz z podfolderami)
