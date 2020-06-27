@@ -22,8 +22,8 @@ Przykład:
 
 **Instrukcja:**
 
-Program uruchamiany jest z wiersza poleceń. 
-Plik do pobrania dostępny jest: 
+Program uruchamiany jest z wiersza poleceń. Aby to zrobic należy podać komendę ```java -jar```, lokalizację pliku wykonywalnego jar oraz parametry opisane poniżej.
+Plik wykonywalny do pobrania: 
 https://github.com/mhendzel123/reporter/raw/report5/target/reporter-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 
