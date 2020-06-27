@@ -27,11 +27,12 @@ https://github.com/mhendzel123/reporter/raw/report5/target/reporter-1.0-SNAPSHOT
 **Polecenia do generowania poszczególnych raportów:**
 
 **Wymagane:**
+
 -s <ścieżka do katalogu źródłowego>
 
 -r \<typ raportu\> (dostępne wartości od 1 do 5)
 
--q <wyszukiwana fraza> (parametr tylko dla raportu 5, można podać tylko jedną wyszukiwaną frazę, wielkość znaków nie ma znaczenia)
+-q \<wyszukiwana fraza\> (parametr tylko dla raportu 5, można podać tylko jedną wyszukiwaną frazę, wielkość znaków nie ma znaczenia)
 
 **Opcjonalne:**
 
@@ -41,9 +42,9 @@ https://github.com/mhendzel123/reporter/raw/report5/target/reporter-1.0-SNAPSHOT
 
 -png (zapisuje wykres w pliku png)
 
--ef <tekst> (dla raportów 1 i 3, wygenerują się tylko dla pracowników, których imię lub nazwisko zawiera podany tekst, można podać tylko jedną wyszukiwaną frazę, wielkość znaków nie ma znaczenia)
+-ef \<tekst\> (dla raportów 1 i 3, wygenerują się tylko dla pracowników, których imię lub nazwisko zawiera podany tekst, można podać tylko jedną wyszukiwaną frazę, wielkość znaków nie ma znaczenia)
 
--pf <tekst> (dla raportów 2 - 5, wygenerują się tylko dla projektów, których nazwa zawiera podany tekst, można podać tylko jedną wyszukiwaną frazę, wielkość znaków nie ma znaczenia)
+-pf \<tekst\> (dla raportów 2 - 5, wygenerują się tylko dla projektów, których nazwa zawiera podany tekst, można podać tylko jedną wyszukiwaną frazę, wielkość znaków nie ma znaczenia)
 
 
 **Przykłady użycia:**
